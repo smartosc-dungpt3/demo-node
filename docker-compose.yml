@@ -1,0 +1,37 @@
+version: '3.8'
+
+services:
+    localstack:
+        image: localstack/localstack:1.4.0
+        environment:
+            - AWS_DEFAULT_REGION=ap-northeast-1
+            - EDGE_PORT=4566
+            - SERVICES=lambda,s3,cloudformation,sts,apigateway,iam,dynamodb,sqs
+        ports:
+            - '4566-4597:4566-4597'
+
+    dynamodb-admin:
+        image: aaronshaf/dynamodb-admin
+        ports:
+            - '8001:8001'
+        environment:
+            DYNAMO_ENDPOINT: 'localstack:4566'
+            AWS_REGION: 'ap-northeast-1'
+            AWS_ACCESS_KEY_ID: 'foobar'
+            AWS_SECRET_ACCESS_KEY: 'foobar'
+        depends_on:
+            - localstack
+
+    s3-admin:
+        image: mastertinner/s3manager
+        ports:
+            - '8002:8080'
+        environment:
+            ENDPOINT: 'localstack:4566'
+            ACCESS_KEY_ID: 'foobar'
+            SECRET_ACCESS_KEY: 'foobar'
+            USE_SSL: false
+        depends_on:
+            - localstack
+
+    # For SQS client. See: https://github.com/rgaquino/sqs-client/releases

@@ -1,0 +1,4 @@
+function1oki:
+    handler: helloworld
+    memorySize: 512
+    timeout: 30

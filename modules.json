@@ -1,0 +1,9 @@
+{
+    "compilerOptions": {
+        "paths": {
+            "~Model/*": ["src/app/core/Model/*"],
+            "~Resource_Model/*": ["src/app/core/ResourceModel/*"],
+            "~VendorA_ModuleA1/*": ["src/app/extension/VendorA/ModuleA1/*"]
+        }
+    }
+}

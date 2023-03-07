@@ -1,0 +1,9 @@
+S3BUCKETSTORAGE:
+    Type: AWS::S3::Bucket
+    Properties:
+        BucketName: demo-node-${opt:stage}
+        PublicAccessBlockConfiguration:
+            BlockPublicAcls: true
+            BlockPublicPolicy: true
+            IgnorePublicAcls: true
+            RestrictPublicBuckets: true
