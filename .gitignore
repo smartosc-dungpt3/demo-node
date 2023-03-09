@@ -29,3 +29,6 @@ Desktop.ini
 
 # env
 #.env
+
+# Test
+__tests__
