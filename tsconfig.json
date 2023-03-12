@@ -9,21 +9,22 @@
         "strict": true,
         "forceConsistentCasingInFileNames": true,
         "noFallthroughCasesInSwitch": true,
-        "module": "esnext",
+        "module": "commonjs",
         "moduleResolution": "node",
         "resolveJsonModule": true,
         "isolatedModules": false,
-        "noEmit": true,
+        "noEmit": false,
         "noUnusedParameters": false,
         "experimentalDecorators": true,
         "emitDecoratorMetadata": true,
-        "removeComments": false,
+        "removeComments": true,
         "preserveConstEnums": true,
-        "sourceMap": true,
-        "sourceRoot": "/",
+        "sourceMap": false,
         "baseUrl": "./",
-        "rootDir": "src"
+        "rootDir": "src",
+        "outDir": "./dist"
     },
     "include": ["src"],
+    "exclude": ["node_modules", "**/*.test.ts"],
     "extends": "./modules.json"
 }

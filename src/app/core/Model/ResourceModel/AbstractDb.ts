@@ -43,13 +43,41 @@ export default class AbstractDb {
     }
 
     /**
-     * Insert Or Update
-     *
      * @param body
      */
-    public async insertOrUpdate(body: any) {
-        const record = new (this.getModel())(body)
-        await record.save()
-        return record
+    public async insert(body: any) {
+        return await this.getModel().create(body)
+    }
+
+    /**
+     * @param key
+     */
+    public async getByKey<T>(key: string | number): Promise<T> {
+        const result = await this.getModel().get(key)
+        if (result) {
+            return result as T
+        }
+        throw new Error('Item not Found!')
+    }
+
+    /**
+     * @param body
+     */
+    public async update(body: any) {
+        return await this.getModel().update(body)
+    }
+
+    /**
+     * @param key
+     */
+    public async deleteByKey(key: string | number) {
+        return await this.getModel().delete(key)
+    }
+
+    /**
+     * Scan all items with no filters or options
+     */
+    public async scan() {
+        return await this.getModel().scan().exec()
     }
 }

@@ -3,10 +3,10 @@ TBLTODO:
     Properties:
         TableName: tbl_todo
         AttributeDefinitions:
-            - AttributeName: entity_id
-              AttributeType: N
+            - AttributeName: task_name
+              AttributeType: S
         KeySchema:
-            - AttributeName: entity_id
+            - AttributeName: task_name
               KeyType: HASH
         ProvisionedThroughput:
             ReadCapacityUnits: 1

@@ -39,11 +39,16 @@ module.exports = () => {
     const functions = Object.keys(mapFiles)
         .map(dir => {
             const yml = YAML.parse(mapFiles[dir])
+
+            // Auto load handlers
             Object.keys(yml).forEach(functionName => {
-                // Auto load handlers
                 const handlerFileName = yml[functionName].handler
                 let actualHandler = dir + '/Handler/' + handlerFileName
                 actualHandler = actualHandler.replace(__dirname + '/', '')
+                if (actualHandler.slice(0, 'src/'.length) === 'src/') {
+                    actualHandler = actualHandler.substring('src/'.length)
+                    actualHandler = 'dist/' + actualHandler
+                }
                 yml[functionName].handler = actualHandler + '.default'
             })
             return yml

@@ -1,5 +1,5 @@
 import 'reflect-metadata' // Must have
-import { container, injectable, singleton } from 'tsyringe'
+import { injectable, singleton } from 'tsyringe'
 import * as dynamoose from 'dynamoose'
 require('dotenv').config()
 

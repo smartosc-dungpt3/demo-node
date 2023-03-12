@@ -14,6 +14,10 @@ provider:
     timeout: 30
     memorySize: 512 #Default Lambda Memory Size
 
+package:
+    patterns: ${file(package-patterns.yml)}
+    excludeDevDependencies: true
+
 custom:
     stage: ${opt:stage, 'local'}
     localstack:
@@ -23,12 +27,14 @@ custom:
         edgePort: 4566
         lambda:
             mountCode: false
-    esbuild:
-        minify: true
+    serverless-offline:
+        host: '0.0.0.0'
+        httpPort: 3000
+        noAuth: true
 
 plugins:
     - serverless-localstack
-    - serverless-esbuild
+    - serverless-offline
 
 functions:
     - ${file(serverless-dynamic-functions.js)}

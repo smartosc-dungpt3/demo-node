@@ -1,4 +1,10 @@
-function1oki:
-    handler: helloworld
+VendorA-ModuleA1:
+    handler: Api # Autoload => Handler/Api.ts
     memorySize: 512
     timeout: 30
+    events:
+        - http:
+            path: /{proxy+}
+            method: ANY
+            cors: true
+            private: true

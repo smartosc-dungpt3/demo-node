@@ -5,6 +5,7 @@ services:
         image: localstack/localstack:1.4.0
         environment:
             - AWS_DEFAULT_REGION=ap-northeast-1
+            - AWS_DYNAMO_ENDPOINT=http://localstack:4566
             - EDGE_PORT=4566
             - SERVICES=lambda,s3,cloudformation,sts,apigateway,iam,dynamodb,sqs
         ports:
