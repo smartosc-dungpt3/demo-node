@@ -1,5 +1,5 @@
 import express from 'express'
-import { ApiResponseInterface } from '~Http/Types'
+import { ApiResponseInterface } from '@Http/Types'
 
 export default abstract class AbstractApi {
     abstract execute(req: any): Promise<ApiResponseInterface>

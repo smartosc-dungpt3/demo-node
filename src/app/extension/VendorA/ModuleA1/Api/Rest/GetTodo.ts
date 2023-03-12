@@ -1,8 +1,8 @@
-import AbstractApi from '~Http/AbstractApi'
+import AbstractApi from '@Http/AbstractApi'
 import { inject, injectable } from 'tsyringe'
-import { GET } from '~Http/Decorators/HttpMethod'
-import Route from '~Http/Decorators/Route'
-import TodoModel, { TodoInterface } from '~VendorA_ModuleA1/Model/Todo'
+import { GET } from '@Http/Decorators/HttpMethod'
+import Route from '@Http/Decorators/Route'
+import TodoModel, { TodoInterface } from '@VendorA_ModuleA1/Model/Todo'
 import { Request } from 'express-serve-static-core'
 
 @GET

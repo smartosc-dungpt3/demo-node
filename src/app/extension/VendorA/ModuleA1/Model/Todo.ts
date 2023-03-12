@@ -1,7 +1,7 @@
 import 'reflect-metadata' // Must have
 import { inject, injectable } from 'tsyringe'
-import AbstractModel from '~Model/AbstractModel'
-import TodoResourceModel from '~VendorA_ModuleA1/Model/ResourceModel/Todo'
+import AbstractModel from '@Model/AbstractModel'
+import TodoResourceModel from '@VendorA_ModuleA1/Model/ResourceModel/Todo'
 
 export interface TodoInterface {
     task_name: string

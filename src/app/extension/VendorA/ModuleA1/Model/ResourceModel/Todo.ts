@@ -1,6 +1,6 @@
 import 'reflect-metadata' // Must have
 import { injectable, singleton } from 'tsyringe'
-import AbstractDb from '~Model/ResourceModel/AbstractDb'
+import AbstractDb from '@Model/ResourceModel/AbstractDb'
 import * as dynamoose from 'dynamoose'
 
 @singleton()

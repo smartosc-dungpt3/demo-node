@@ -1,10 +1,10 @@
 {
     "compilerOptions": {
         "paths": {
-            "~Autoload": ["src/app/Autoload.ts"],
-            "~Http/*": ["src/app/core/Http/*"],
-            "~Model/*": ["src/app/core/Model/*"],
-            "~VendorA_ModuleA1/*": ["src/app/extension/VendorA/ModuleA1/*"]
+            "@Autoload": ["src/app/Autoload.ts"],
+            "@Http/*": ["src/app/core/Http/*"],
+            "@Model/*": ["src/app/core/Model/*"],
+            "@VendorA_ModuleA1/*": ["src/app/extension/VendorA/ModuleA1/*"]
         }
     }
 }

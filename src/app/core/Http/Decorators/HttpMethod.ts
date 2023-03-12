@@ -1,4 +1,4 @@
-import { HttpMethodType } from '~Http/Types'
+import { HttpMethodType } from '@Http/Types'
 
 export function GET(target: Function) {
     target.prototype.httpMethod = 'get' as HttpMethodType

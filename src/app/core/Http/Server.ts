@@ -2,7 +2,7 @@ import express from 'express'
 import serverless from 'serverless-http'
 import BodyParser from 'body-parser'
 import cors from 'cors'
-import { ApiResponseInterface } from '~Http/Types'
+import { ApiResponseInterface } from '@Http/Types'
 
 export default (routes: any) => {
     const app = express()
