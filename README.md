@@ -1,7 +1,9 @@
 ### An improved structure for serverless on nodejs...
 
+<!-- TOC depthFrom:1 depthTo:3 -->
 - [Overview](#overview)
 - [Get started](#getstarted)
+<!-- /TOC -->
 
 ## Overview
 
