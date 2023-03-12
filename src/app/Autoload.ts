@@ -75,7 +75,9 @@ export const getRestApi = (dirname: string) => {
                 // @ts-ignore
                 app.use(renderRoute)
                 // @ts-ignore
-                RoutesLoaded.push(obj?.route)
+                const httpMethod = (obj?.httpMethod || 'get').toUpperCase()
+                // @ts-ignore
+                RoutesLoaded.push(httpMethod + ':' + obj?.route)
             }
         }
     }

@@ -1,14 +1,13 @@
 import AbstractApi from '@Http/AbstractApi'
-import { Request } from 'express-serve-static-core'
 import { inject, injectable } from 'tsyringe'
-import { POST } from '@Http/Decorators/HttpMethod'
+import { GET } from '@Http/Decorators/HttpMethod'
 import Route from '@Http/Decorators/Route'
-import TodoModel, { TodoInterface } from '@VendorA_ModuleA1/Model/Todo'
+import TodoModel from '@VendorA_ModuleA1/Model/Todo'
 
-@POST
+@GET
 @Route('/todo')
 @injectable()
-export default class AddTodo extends AbstractApi {
+export default class GetAllTodo extends AbstractApi {
     /**
      * Constructor
      */
@@ -19,8 +18,8 @@ export default class AddTodo extends AbstractApi {
     /**
      * Execute
      */
-    async execute(req: Request<TodoInterface>) {
-        const data = await this.todoModel.newTodo(req.body.task_name)
+    async execute() {
+        const data = await this.todoModel.getAllTodo()
         return {
             data,
         }

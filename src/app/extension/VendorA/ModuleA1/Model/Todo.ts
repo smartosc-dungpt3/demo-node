@@ -18,10 +18,13 @@ export default class TodoModel extends AbstractModel {
     }
 
     /**
-     * @param item
+     * @param task_name
      */
-    public async newTodo(item: TodoInterface): Promise<TodoInterface> {
-        item.is_completed = false
+    public async newTodo(task_name: string): Promise<TodoInterface> {
+        const item = {
+            task_name,
+            is_completed: false
+        }
         await this.resourceModel.insert(item)
         return item
     }
@@ -46,6 +49,7 @@ export default class TodoModel extends AbstractModel {
     public async completeTodo(task_name: string) {
         const body: TodoInterface = { task_name, is_completed: true }
         await this.resourceModel.update(body)
+        return body
     }
 
     /**

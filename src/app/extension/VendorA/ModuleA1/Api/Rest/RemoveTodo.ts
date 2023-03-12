@@ -1,11 +1,11 @@
 import AbstractApi from '@Http/AbstractApi'
 import { Request } from 'express-serve-static-core'
 import { inject, injectable } from 'tsyringe'
-import { POST } from '@Http/Decorators/HttpMethod'
+import { DELETE } from '@Http/Decorators/HttpMethod'
 import Route from '@Http/Decorators/Route'
 import TodoModel, { TodoInterface } from '@VendorA_ModuleA1/Model/Todo'
 
-@POST
+@DELETE
 @Route('/todo')
 @injectable()
 export default class AddTodo extends AbstractApi {
@@ -20,7 +20,7 @@ export default class AddTodo extends AbstractApi {
      * Execute
      */
     async execute(req: Request<TodoInterface>) {
-        const data = await this.todoModel.newTodo(req.body.task_name)
+        const data = await this.todoModel.removeTodo(req.body.task_name)
         return {
             data,
         }

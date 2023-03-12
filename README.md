@@ -20,6 +20,52 @@ Features:
 - Dynamic functions.
 - Dependency Injection pattern, Singleton pattern, Interception.
 
+Folder structure:
+```
+.
+`-- Root/
+    |-- dist/
+    |-- src/
+    |   `-- app/
+    |       |-- core/
+    |       |   `-- ...
+    |       |-- extension/
+    |       |   |-- VendorA/
+    |       |   |   |-- ModuleA1/
+    |       |   |   |   |-- Api/
+    |       |   |   |   |   `-- Rest/
+    |       |   |   |   |       |-- Todo.ts
+    |       |   |   |   |       `-- ...
+    |       |   |   |   |-- etc/
+    |       |   |   |   |   `-- di.ts
+    |       |   |   |   |-- Handler/
+    |       |   |   |   |   |-- Api.ts
+    |       |   |   |   |   `-- ...
+    |       |   |   |   |-- Model/
+    |       |   |   |   |   |-- ResourceModel/
+    |       |   |   |   |   |   |-- Todo.ts
+    |       |   |   |   |   |   `-- ...
+    |       |   |   |   |   |-- Todo.ts
+    |       |   |   |   |   `-- ...
+    |       |   |   |   |-- Resources/
+    |       |   |   |   |   |-- tbl_todo.yml
+    |       |   |   |   |   `-- ...
+    |       |   |   |   |-- functions.yml
+    |       |   |   |   `-- ...
+    |       |   |   |-- ModuleA2
+    |       |   |   `-- ...
+    |       |   |-- VendorB/
+    |       |   |   |-- ModuleB1
+    |       |   |   |-- ModuleB2
+    |       |   |   `-- ...
+    |       |   `-- ...
+    |       `-- Autoload.ts
+    |-- serverless.yml
+    |-- serverless-dynamic-functions.js
+    |-- serverless-dynamic-resources.js
+    `-- ...
+```
+
 ## Get started
 
 #### Requirement:
