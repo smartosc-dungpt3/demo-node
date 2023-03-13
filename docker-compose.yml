@@ -31,7 +31,7 @@ services:
             ENDPOINT: 'localstack:4566'
             ACCESS_KEY_ID: 'foobar'
             SECRET_ACCESS_KEY: 'foobar'
-            USE_SSL: false
+            USE_SSL: 0
         depends_on:
             - localstack
 
