@@ -182,9 +182,9 @@ export class Client {
 Resolve it:
 ```typescript
 import 'reflect-metadata' // Must have
-import { container } from 'tsyringe'
+import { getContainer } from '@Autoload'
 
-const clientA = container.resolve(Client)
+const clientA = getContainer().resolve(Client)
 clientA.setUser('Alice')
 
 clientA.getUser() // Hello Alice
