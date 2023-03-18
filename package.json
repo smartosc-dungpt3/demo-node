@@ -6,12 +6,12 @@
     "scripts": {
         "compile": "node bin/checknodeversion.js && rimraf dist/ && tsc --project tsconfig.json && tsc-alias -p tsconfig.json",
         "start:local": "env-cmd -f .env.local serverless offline start --stage local",
-        "deploy:local": "env-cmd -f .env.local serverless deploy --stage local",
-        "predeploy:local": "npm run compile && docker-compose down && rimraf .serverless/ && docker-compose up -d --build --remove-orphans",
+        "deploy:local": "env-cmd -f .env.local serverless deploy --stage local --package .serverless_local",
         "deploy:preprod": "env-cmd -f .env.preprod serverless deploy --stage preprod --verbose",
-        "predeploy:preprod": "npm run compile && rimraf .serverless/",
         "deploy:prod": "env-cmd -f .env.prod serverless deploy --stage prod --verbose",
-        "predeploy:prod": "npm run compile && rimraf .serverless/"
+        "predeploy:local": "npm run compile && docker-compose down && rimraf .serverless_local/ && docker-compose up -d --build --remove-orphans && serverless package --stage local --package .serverless_local",
+        "predeploy:preprod": "npm run compile && rimraf .serverless_preprod/ && serverless package --stage preprod --package .serverless_preprod",
+        "predeploy:prod": "npm run compile && rimraf .serverless_prod/ && serverless package --stage prod --package .serverless_prod"
     },
     "dependencies": {
         "aws-sdk": "2.1328.0",

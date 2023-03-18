@@ -87,7 +87,7 @@ Folder structure:
 
 That all. We are ready to develop.
 
-To deploy to AWS:
+To deploy to AWS, add env files `.env.preprod` or `.env.prod`
 - `npm run deploy:preprod`
 
 OR
