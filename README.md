@@ -87,6 +87,13 @@ Folder structure:
 
 That all. We are ready to develop.
 
+To deploy to AWS:
+- `npm run deploy:preprod`
+
+OR
+
+- `npm run deploy:prod`
+
 ## Alias import
 Define alias import in `modules.json`:
 ```json

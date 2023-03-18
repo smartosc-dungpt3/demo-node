@@ -28,7 +28,8 @@ Desktop.ini
 /node_modules
 
 # env
-#.env
+.env.preprod
+.env.prod
 
 # Test
 __tests__
