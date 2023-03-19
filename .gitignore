@@ -22,6 +22,7 @@ Desktop.ini
 /.vscode
 
 # Serverless
+/.serverless
 /.serverless_prod
 /.serverless_preprod
 /.serverless_local

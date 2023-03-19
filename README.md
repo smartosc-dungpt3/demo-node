@@ -10,6 +10,7 @@
   - [Dependency Injection](#dependency-injection)
 - [Create a Lambda function](#create-a-lambda-function)
 - [Create a Rest API](#create-a-rest-api)
+- [Important](#important)
 <!-- /TOC -->
 
 # Overview
@@ -82,8 +83,8 @@ Folder structure:
 
 ## Installation
 - `npm install`
-- `npm run deploy:local`
-- `npm run start:local`
+- `npm run deploy:local` After deploy, you can invoke lambda function.
+- `npm run start:local` Start ApiGateway
 
 That all. We are ready to develop.
 
@@ -100,9 +101,7 @@ Define alias import in `modules.json`:
 {
     "compilerOptions": {
         "paths": {
-            // ...
-            "@VendorA_ModuleA1/*": ["src/app/extension/VendorA/ModuleA1/*"],
-            // New module here
+            "@VendorA_ModuleA1/*": ["src/app/extension/VendorA/ModuleA1/*"]
         }
     }
 }
@@ -252,7 +251,7 @@ import Route from '@Http/Decorators/Route'
 import TodoModel, { TodoInterface } from '@VendorA_ModuleA1/Model/Todo'
 
 @POST
-@Route('/todo')
+@Route('/todo/:anyparam')
 @injectable()
 export default class AddTodo extends AbstractApi {
     /**
@@ -288,4 +287,131 @@ export default class AddTodo extends AbstractApi {
 #### Route Decorator:
 ```text
 @Route(url, [validator])
+```
+
+# Polices
+### Customer managed
+```json
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "AllowAll",
+      "Effect": "Allow",
+      "Action": [
+        "s3:ListBucket",
+        "cloudformation:ValidateTemplate",
+        "sts:AssumeRole",
+        "apigateway:DELETE",
+        "apigateway:PUT",
+        "apigateway:PATCH",
+        "apigateway:POST",
+        "apigateway:GET",
+        "apigateway:UpdateRestApiPolicy"
+      ],
+      "Resource": "*"
+    },
+    {
+      "Sid": "Cloudformation",
+      "Effect": "Allow",
+      "Action": [
+        "cloudformation:DescribeStackResource",
+        "cloudformation:DescribeStacks",
+        "cloudformation:DeleteChangeSet",
+        "cloudformation:CreateChangeSet",
+        "cloudformation:DescribeChangeSet",
+        "cloudformation:ExecuteChangeSet",
+        "cloudformation:DescribeStackEvents",
+        "cloudformation:ListStackResources",
+        "cloudformation:DescribeStackResources"
+      ],
+      "Resource": [
+        "arn:aws:cloudformation:ap-northeast-1:492135______:stack/demo-node-preprod/*"
+      ]
+    },
+    {
+      "Sid": "S3",
+      "Effect": "Allow",
+      "Action": [
+        "s3:GetObject",
+        "s3:PutObject",
+        "s3:DeleteObject"
+      ],
+      "Resource": "*"
+    },
+    {
+      "Sid": "Lambda",
+      "Effect": "Allow",
+      "Action": [
+        "lambda:GetFunction",
+        "lambda:UpdateFunctionCode",
+        "lambda:ListTags",
+        "lambda:UntagResource",
+        "lambda:ListVersionsByFunction",
+        "lambda:TagResource",
+        "lambda:PublishVersion"
+      ],
+      "Resource": [
+        "arn:aws:lambda:ap-northeast-1:492135______:function:*"
+      ]
+    },
+    {
+      "Sid": "IAM",
+      "Effect": "Allow",
+      "Action": [
+        "iam:GetRole",
+        "iam:CreateRole",
+        "iam:DeleteRolePolicy",
+        "iam:PutRolePolicy",
+        "iam:DeleteRole"
+      ],
+      "Resource": [
+        "arn:aws:iam::492135______:role/demo-node-preprod-*"
+      ]
+    },
+    {
+      "Sid": "Dynamodb",
+      "Effect": "Allow",
+      "Action": [
+        "dynamodb:DescribeTable",
+        "dynamodb:Query",
+        "dynamodb:Scan",
+        "dynamodb:GetItem",
+        "dynamodb:PutItem",
+        "dynamodb:UpdateItem",
+        "dynamodb:DeleteItem",
+        "dynamodb:BatchGetItem",
+        "dynamodb:BatchWriteItem"
+      ],
+      "Resource": [
+        "arn:aws:dynamodb:ap-northeast-1:492135______:table/*"
+      ]
+    }
+  ]
+}
+```
+
+# Important
+
+### Package size
+
+Lambda limits the size of the package to 250MB, including `node_modules`.
+So, only add libraries that you "require" in the `src` folder to `dependencies` in `package.json`.
+Libraries that are not used during runtime, put them in the `devDependencies` section.
+This will reduce the size of the package. See `serverless.yml`:
+
+```yaml
+package:
+    excludeDevDependencies: true
+```
+
+By remove unnecessary files in `package-patterns.yml`. After deploy to AWS, the package is just like this:
+```text
+|-- demo-node.zip (< 250MB)
+|    |-- dist/ (compiled code)
+|    |-- node_modules/
+|    |-- package-lock.json
+|    `-- package.json
+|-- compiled-cloudformation-template.json
+|-- ...
 ```

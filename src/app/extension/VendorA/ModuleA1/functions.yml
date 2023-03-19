@@ -1,7 +1,8 @@
-VendorA-ModuleA1:
+Api:
     handler: Api # Autoload => Handler/Api.ts
     memorySize: 512
     timeout: 30
+    description: CRUD for Todo app
     events:
         - http:
             path: /{proxy+}

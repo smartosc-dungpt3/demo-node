@@ -30,15 +30,12 @@ module.exports = (sls) => {
         if (route.ext !== '.yml' || dirs[dirs.length - 1] !== 'Resources') {
             continue
         }
-        if (sls?.options?.stage !== 'local' && route.base !== 'tbl_test.yml') {
-            continue
-        }
         routes.push(route)
     }
 
     const mapFiles = {}
     for (const r of routes) {
-        mapFiles[r.dir] = fs.readFileSync(r.dir + '/' + r.base, 'utf8')
+        mapFiles[r.dir + '/' + r.base] = fs.readFileSync(r.dir + '/' + r.base, 'utf8')
     }
 
     const resources = Object.keys(mapFiles)

@@ -35,8 +35,8 @@ export default class ResourceConnection implements ResourceConnectionInterface {
         // Set DynamoDB instance to the Dynamoose DDB instance
         dynamoose.aws.ddb.set(ddb)
 
-        // Set DynamoDB endpoint
-        if (process.env.AWS_DYNAMO_ENDPOINT) {
+        // Set DynamoDB endpoint for serverless-offline
+        if (process.env?.IS_OFFLINE === 'true' && process.env?.AWS_DYNAMO_ENDPOINT) {
             dynamoose.aws.ddb.local(process.env.AWS_DYNAMO_ENDPOINT)
         }
 

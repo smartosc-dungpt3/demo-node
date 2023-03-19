@@ -13,6 +13,9 @@ provider:
     region: ap-northeast-1
     timeout: 30
     memorySize: 512 #Default Lambda Memory Size
+    apiGateway:
+        apiKeys:
+            - ${opt:stage, 'local'}-demo-node-service-apikey
 
 package:
     patterns: ${file(package-patterns.yml)}

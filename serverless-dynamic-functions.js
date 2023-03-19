@@ -16,6 +16,11 @@ function* getAllFiles(dir) {
     }
 }
 
+function getModuleNameFromModulePath(modulePath) {
+    const arr = modulePath.split('/')
+    return arr.slice(arr.length - 2, arr.length - 0).join('-')
+}
+
 module.exports = () => {
     // Autoload files
     const workDir = path.join(__dirname, './src/app')
@@ -40,6 +45,8 @@ module.exports = () => {
         .map(dir => {
             const yml = YAML.parse(mapFiles[dir])
 
+            const moduleName = getModuleNameFromModulePath(dir)
+
             // Auto load handlers
             Object.keys(yml).forEach(functionName => {
                 const handlerFileName = yml[functionName].handler
@@ -50,6 +57,10 @@ module.exports = () => {
                     actualHandler = 'dist/' + actualHandler
                 }
                 yml[functionName].handler = actualHandler + '.default'
+
+                // Add module name as prefix
+                yml[moduleName + '-' + functionName] = { ...yml[functionName] }
+                delete yml[functionName]
             })
             return yml
         })
