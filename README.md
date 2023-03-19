@@ -10,6 +10,7 @@
   - [Dependency Injection](#dependency-injection)
 - [Create a Lambda function](#create-a-lambda-function)
 - [Create a Rest API](#create-a-rest-api)
+- [AWS Policy](#aws-policy)
 - [Important](#important)
 <!-- /TOC -->
 
@@ -289,7 +290,7 @@ export default class AddTodo extends AbstractApi {
 @Route(url, [validator])
 ```
 
-# Polices
+# AWS Policy
 ### Customer managed
 ```json
 {
