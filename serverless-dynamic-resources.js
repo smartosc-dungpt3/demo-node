@@ -2,6 +2,7 @@
 const fs = require('fs')
 const YAML = require('yamljs')
 const path = require('path')
+const chalk = require('chalk')
 
 // Read directory recursive
 function* getAllFiles(dir) {
@@ -16,7 +17,7 @@ function* getAllFiles(dir) {
     }
 }
 
-module.exports = (sls) => {
+module.exports = sls => {
     // Autoload files
     const workDir = path.join(__dirname, './src/app')
     const files = getAllFiles(workDir)
@@ -41,6 +42,22 @@ module.exports = (sls) => {
     const resources = Object.keys(mapFiles)
         .map(dir => YAML.parse(mapFiles[dir]))
         .reduce((result, handler) => Object.assign(result, handler), {})
-    console.log('Resources:', resources)
+
+    if (resources?.DYNAMOEXECUTIONROLE) {
+        let tblResource = []
+        Object.keys(resources).forEach(name => {
+            if (resources[name].Type === 'AWS::DynamoDB::Table') {
+                tblResource = tblResource.concat([
+                    { 'Fn::GetAtt': [name, 'Arn'] },
+                    { 'Fn::Join': ['/', [{ 'Fn::GetAtt': [name, 'Arn'] }, 'index/*']] },
+                ])
+            }
+        })
+        if (tblResource.length) {
+            resources.DYNAMOEXECUTIONROLE.Properties.Policies[0].PolicyDocument.Statement[0].Resource = tblResource
+        }
+    }
+
+    console.log('Resources:', chalk.magenta(JSON.stringify(resources)))
     return resources
 }

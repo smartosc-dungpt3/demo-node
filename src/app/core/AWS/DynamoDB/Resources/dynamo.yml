@@ -26,9 +26,3 @@ DYNAMOEXECUTIONROLE:
                             - dynamodb:DeleteItem
                             - dynamodb:BatchGetItem
                             - dynamodb:BatchWriteItem
-                        Resource:
-                            - 'Fn::GetAtt': [TBLTODO, Arn]
-                            - Fn::Join:
-                                  - '/'
-                                  - - { 'Fn::GetAtt': [TBLTODO, Arn] }
-                                    - 'index/*'

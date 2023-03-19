@@ -1,7 +1,7 @@
-'use strict'
 const fs = require('fs')
 const YAML = require('yamljs')
 const path = require('path')
+const chalk = require('chalk')
 
 // Read directory recursive
 function* getAllFiles(dir) {
@@ -66,6 +66,6 @@ module.exports = () => {
         })
         .reduce((result, handler) => Object.assign(result, handler), {})
 
-    console.log('Functions: ', functions)
+    console.log('Functions: ', chalk.cyan(JSON.stringify(functions)))
     return functions
 }
